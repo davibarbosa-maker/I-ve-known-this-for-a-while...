@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contagem regressiva</title>
+  <style>
+    
+ 
+
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 20px; 
+      background-color: #fafafa; 
+     }
+    .controles {
+       margin-bottom: 20px;
+        padding: 15px;
+         background: #fff;
+          border: 1px solid #ddd
+          ; border-radius: 5px; 
+          max-width: 300px;
+          display: flex;
+          
+          }
+
+    .controles label { display: block; 
+      margin-bottom: 8px;
+       font-weight: bold; }
+
+    .controles input { width: 80px;
+       padding: 5px;
+        margin-left: 10px;
+         float: right; }
+
+    .controles button {
+       width: 100%;
+       margin-top: 15px;
+        padding: 8px;
+        background: #007bff;
+         color: white;
+          border: none;
+           border-radius: 4px; 
+           cursor: pointer;
+            font-size: 16px; 
+          }
+
+    .controles button:hover {
+       background:
+        #0056b3;
+       }
+    ul {
+
+       list-style-type: none
+       ; padding: 0; 
+       
+       max-width: 350px; 
+      }
+
+    li { 
+      padding: 10px;
+       margin: 5px 0;
+        background: #f0f0f0;
+         border-left: 5px solid #ccc;
+          animation: surgindo 0.3s ease-out;
+         }
+
+    .meta { background: #d4edda;
+       border-left-color: #28a745;
+        color: #155724;
+        font-weight: bold; }
+    
+    
+    @keyframes surgindo {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <div class="controles">
+    <label>começo da contagem  <input type="number" id="inputA" value="9"></label>
+    <label>Meta da contage, <input type="number" id="inputMeta" value="5"></label>
+    <button onclick="iniciarContagem()">Iniciar Contagem</button>
+  </div>
+ 
+  <ul id="resultado-loop"></ul>
+
+  <script>
+    let temporizador = null; 
+    function iniciarContagem() {
+      
+      clearInterval(temporizador);
+
+     
+      let a = parseInt(document.getElementById("inputA").value);
+      let meta = parseInt(document.getElementById("inputMeta").value);
+      
+    
+      let x = a; 
+
+      const coco = document.getElementById("resultado-loop");
+      coco.innerHTML = ""; 
+
+     
+      temporizador = setInterval(() => {
+        
+    
+        if (x === meta) {
+          coco.innerHTML += `<li class="meta"> Valor ${x}: alcançou a meta!</li>`;
+          clearInterval(temporizador); 
+          return;
+        }
+
+
+        if (x < 0) {
+          coco.innerHTML += `<li>Fim da contagem!</li>`;
+          clearInterval(temporizador); 
+          return;
+        }
+
+        coco.innerHTML += `<li>Regressiva: ${x}</li>`;
+        x--;
+
+      }, 1000); 
+    }
+  </script>
+
+</body>
+</html>
